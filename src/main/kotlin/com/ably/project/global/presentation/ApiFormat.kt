@@ -17,6 +17,14 @@ class ApiFormat<T>(
     var meta: Meta = Meta.ok()
 ) {
     companion object {
+        /**
+         * 공통 헤더
+         */
+        val header = mapOf(
+            "Site-Code" to "ABLY",
+            "Authorization-Type" to "SYSTEM"
+        )
+
         fun exception(statusCode: Int, message: String): ResponseEntity<ApiFormat<Unit>> {
             val header = HttpHeaders().apply {
                 this.accept = mutableListOf(MediaType.APPLICATION_JSON)
@@ -66,14 +74,14 @@ class Meta(
     val resultMsg: String? = null
 ) {
     companion object {
-        fun ok() = Meta(result = MetaResult.ok, code = 200, resultMsg = "")
-        fun ok(resultMsg:String) = Meta(result = MetaResult.ok, code = 200, resultMsg = resultMsg)
-        fun ok(code: Int, resultMsg:String) = Meta(result = MetaResult.ok, code = code, resultMsg = resultMsg)
-        fun fail(code: Int,message: String) = Meta(result = MetaResult.fail, code = code, resultMsg = message)
+        fun ok() = Meta(result = MetaResult.OK, code = 200, resultMsg = "")
+        fun ok(resultMsg:String) = Meta(result = MetaResult.OK, code = 200, resultMsg = resultMsg)
+        fun ok(code: Int, resultMsg:String) = Meta(result = MetaResult.OK, code = code, resultMsg = resultMsg)
+        fun fail(code: Int,message: String) = Meta(result = MetaResult.FAIL, code = code, resultMsg = message)
     }
 }
 
 /**
  * Meta에서 사용되는 공통코드
  */
-enum class MetaResult { ok, fail }
+enum class MetaResult { OK, FAIL }

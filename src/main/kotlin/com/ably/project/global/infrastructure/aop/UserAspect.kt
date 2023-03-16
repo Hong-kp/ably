@@ -25,7 +25,6 @@ class UserAspect {
     fun roleCheck(joinPoint: JoinPoint) {
         val methodRoles = getAuthsFromAnnotation(joinPoint)
         val authorityType = getRequestHeader("Authorization-Type")
-        val bearer = getRequestHeader("Authorization")
 
         checkUserType(methodRoles, authorityType).onSuccess {
             log.info("(@User@Type) 검증성공 {}",it)
