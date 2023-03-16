@@ -1,0 +1,22 @@
+server:
+  servlet:
+    session:
+      timeout: 60 # 기본 30분이며 60s 미만 설정시 60초로 된다.
+
+# spring common
+spring:
+  output:
+    ansi:
+      enabled: ALWAYS
+  devtools:
+    livereload:
+      enabled: false
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+  aop:
+    proxy-target-class: true
+  mvc:
+    path-match:
+      matching-strategy: ant_path_matcher

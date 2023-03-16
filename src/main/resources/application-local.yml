@@ -1,0 +1,67 @@
+# spring common
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=MySQL;
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+#    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+#      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate.show_sql: true
+      hibernate.format_sql: true
+  output:
+    ansi:
+      enabled: always
+  config:
+    activate:
+      on-profile: local
+
+# server
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+application:
+  environment: local
+
+## logging
+logging:
+  level:
+    com.ably.com.ably.project: debug
+    org.springframework: info
+
+sentry:
+  enabled: true
+  environment: local
+
+# feign client
+feign:
+  autoconfiguration:
+    jackson:
+      enabled: true
+  ably-api:
+    url: http://localhost:8080
+  httpclient:
+    connection-timeout: 1000
+  client:
+    config:
+      log-client: # 특정 FeignClient가 아닌 모든 Client에 대해 적용하고자 하는 경우 default 입력
+        loggerLevel: FULL

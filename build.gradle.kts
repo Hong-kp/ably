@@ -49,6 +49,8 @@ dependencies {
     implementation("org.springframework:spring-aspects")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
+    runtimeOnly("com.h2database:h2")
+
 //	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.6.4")
 
@@ -67,14 +69,6 @@ dependencies {
     implementation("com.amazonaws:aws-java-sdk-s3:1.12.368")
     implementation("org.springframework.boot:spring-boot-starter-freemarker")
     implementation("no.api.freemarker:freemarker-java8:2.1.0")
-
-    // imaport
-    implementation("com.github.iamport:iamport-rest-client-java:0.2.17")
-
-    // redis
-    implementation("org.springframework.boot:spring-boot-starter-data-redis")
-    implementation("org.springframework.session:spring-session-data-redis")
-    implementation("org.redisson:redisson:3.13.1")
 
     // Logging
     implementation("io.github.microutils:kotlin-logging-jvm:2.1.21")
@@ -123,8 +117,6 @@ dependencies {
     testImplementation("org.assertj:assertj-core:3.23.1")
 
     implementation("io.jsonwebtoken:jjwt:0.9.1")
-
-    implementation("net.bull.javamelody:javamelody-spring-boot-starter:1.91.0")
 }
 
 tasks.withType<KotlinCompile> {
@@ -144,16 +136,6 @@ buildscript {
     }
 }
 
-val profiles: String = System.getProperty("profiles") ?: "local"
-
 sourceSets.main {
-    resources.setSrcDirs(listOf("src/main/resources","src/main/resources/${profiles}"))
-        .setExcludes(
-            listOf(
-                "src/main/resources/local",
-                "src/main/resources/qa",
-                "src/main/resources/production"
-            )
-        )
-
+    resources.setSrcDirs(listOf("src/main/resources"))
 }
