@@ -42,7 +42,6 @@ repositories {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-cache")
     implementation("org.springframework.boot:spring-boot-starter-test")
     implementation("org.springframework.retry:spring-retry")
@@ -50,9 +49,6 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
     runtimeOnly("com.h2database:h2")
-
-//	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.6.4")
 
     implementation("com.fasterxml.jackson.core:jackson-databind:2.13.4.2")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.4")
@@ -63,27 +59,25 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("com.querydsl:querydsl-jpa")
     implementation("junit:junit:4.13.2")
-    implementation("org.modelmapper:modelmapper:3.1.0")
     implementation("org.apache.commons:commons-dbcp2")
     implementation("mysql:mysql-connector-java")
     implementation("com.amazonaws:aws-java-sdk-s3:1.12.368")
-    implementation("org.springframework.boot:spring-boot-starter-freemarker")
-    implementation("no.api.freemarker:freemarker-java8:2.1.0")
 
     // Logging
     implementation("io.github.microutils:kotlin-logging-jvm:2.1.21")
     implementation("ch.qos.logback:logback-classic:1.2.11")
     implementation("net.logstash.logback:logstash-logback-encoder:7.0.1")
-    implementation("io.sentry:sentry-spring-boot-starter:5.7.2")
-    implementation("io.sentry:sentry-logback:5.7.2")
 
     // feign controller
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign:3.1.4")
     implementation("io.github.openfeign:feign-gson:11.9.1")
     implementation("io.github.openfeign:feign-jackson:11.9.1")
 
-    // webflux
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
+    // jwt
+    implementation("io.jsonwebtoken:jjwt:0.9.1")
+    implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+    implementation("io.jsonwebtoken:jjwt-impl:0.11.5")
+    implementation("com.auth0:java-jwt:4.0.0")
 
     // for m1
     implementation("io.netty:netty-resolver-dns-native-macos:4.1.68.Final:osx-aarch_64")
@@ -100,23 +94,10 @@ dependencies {
         }
     }
 
-    implementation("io.springfox:springfox-swagger2:2.9.2")
-    implementation("io.springfox:springfox-swagger-ui:2.9.2")
-
-    compileOnly("org.projectlombok:lombok")
-    annotationProcessor("org.projectlombok:lombok")
-
-    implementation("io.jsonwebtoken:jjwt:0.9.1")
-    implementation("io.jsonwebtoken:jjwt-api:0.11.5")
-    implementation("io.jsonwebtoken:jjwt-impl:0.11.5")
-    implementation("com.auth0:java-jwt:4.0.0")
-
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testImplementation("org.junit.jupiter:junit-jupiter-engine")
     testImplementation("com.nhaarman:mockito-kotlin:1.6.0")
     testImplementation("org.assertj:assertj-core:3.23.1")
-
-    implementation("io.jsonwebtoken:jjwt:0.9.1")
 }
 
 tasks.withType<KotlinCompile> {

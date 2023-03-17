@@ -5,11 +5,15 @@ import com.ably.project.global.infrastructure.aop.annotation.User
 import com.ably.project.global.infrastructure.exception.ApiException
 import com.ably.project.global.infrastructure.exception.GlobalErrorCode
 import com.ably.project.global.presentation.enums.AuthorityType
+import com.ably.project.global.utils.JWTUtil
+import com.auth0.jwt.JWT
+import com.auth0.jwt.algorithms.Algorithm
 import org.aspectj.lang.JoinPoint
 import org.aspectj.lang.annotation.Aspect
 import org.aspectj.lang.annotation.Before
 import org.aspectj.lang.reflect.MethodSignature
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import org.springframework.web.context.request.RequestContextHolder
 import org.springframework.web.context.request.ServletRequestAttributes
@@ -21,16 +25,33 @@ import java.util.*
 class UserAspect {
     private val log = LoggerFactory.getLogger(javaClass)
 
+    @Value("\${ably_auth.auth_system.secret-key}")
+    lateinit var secretKey: String
+
+    @Value("\${ably_auth.auth_system.issuer}")
+    lateinit var issuer: String
+
     @Before("@annotation(com.ably.project.global.infrastructure.aop.annotation.User)")
     fun roleCheck(joinPoint: JoinPoint) {
         val methodRoles = getAuthsFromAnnotation(joinPoint)
         val authorityType = getRequestHeader("Authorization-Type")
+        val bearer = getRequestHeader("Authorization")
 
         checkUserType(methodRoles, authorityType).onSuccess {
             log.info("(@User@Type) 검증성공 {}",it)
         }.onFailure {
             throw ApiException(
                 "(@User@Type) 요청 권한이 없습니다.",
+                GlobalErrorCode.INTERNAL_SERVER_ERROR,
+                HttpStatusCode.INTERNAL_SERVER_ERROR
+            )
+        }
+
+        checkUserToken(bearer).onSuccess {
+            log.info("(@User@Token) 검증성공 권한소유자 {}",it)
+        }.onFailure {
+            throw ApiException(
+                "(@User@Token) 요청 권한이 없습니다. (토큰 검증에 실패하였습니다.)",
                 GlobalErrorCode.INTERNAL_SERVER_ERROR,
                 HttpStatusCode.INTERNAL_SERVER_ERROR
             )
@@ -45,6 +66,15 @@ class UserAspect {
             authorityType.find {
                 it.name == token
             }?:throw ApiException()
+        }
+    }
+
+    /**
+     * 토큰 검증
+     */
+    private fun checkUserToken(token: String): Result<String> {
+        return runCatching {
+            JWTUtil.claimByLoginToken(token)
         }
     }
 
