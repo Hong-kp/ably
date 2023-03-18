@@ -22,7 +22,9 @@ import java.util.*
 
 @Component
 @Aspect
-class UserAspect {
+class UserAspect(
+    private val jwtUtil: JWTUtil
+) {
     private val log = LoggerFactory.getLogger(javaClass)
 
     @Value("\${ably_auth.auth_system.secret-key}")
@@ -74,7 +76,7 @@ class UserAspect {
      */
     private fun checkUserToken(token: String): Result<String> {
         return runCatching {
-            JWTUtil.claimByLoginToken(token)
+            jwtUtil.claimByLoginToken(token)
         }
     }
 

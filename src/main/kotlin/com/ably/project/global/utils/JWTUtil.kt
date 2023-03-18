@@ -1,5 +1,6 @@
 package com.ably.project.global.utils
 
+import com.ably.project.customer.presentation.dto.CustomerDTO
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import org.slf4j.LoggerFactory
@@ -7,7 +8,7 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 
 @Component
-object JWTUtil {
+class JWTUtil {
     private val log = LoggerFactory.getLogger(javaClass)
 
     @Value("\${ably_auth.auth_system.secret-key}")
@@ -19,7 +20,7 @@ object JWTUtil {
     /**
      * 전화번호 인증 토큰생송
      */
-    fun createByMobilVerify(): String? {
+    fun createByMobileVerify(): String? {
         return JWT.create()
             .withIssuer(issuer)
             .withSubject("MOBILE_VERIFY_TOKEN") // 전화번호인증 토큰
@@ -43,11 +44,11 @@ object JWTUtil {
     /**
      * 로그인 토큰 생성
      */
-    fun createByLoginVerify(): String? {
+    fun createByLoginVerify(dto: CustomerDTO): String? {
         return JWT.create()
             .withIssuer(issuer)
             .withSubject("CUSTOMER_VERIFY_TOKEN") // 회원인증완료 토큰
-            .withPayload(mapOf("USER_ID" to "k2jeans","USER_NAME" to "홍광표"))
+            .withPayload(mapOf("email" to dto.email,"name" to dto.name))
             .sign(Algorithm.HMAC256(secretKey))
     }
 
