@@ -12,13 +12,11 @@ Site-Code: ABLY_APP
   "auth_code": "1861"
 }
 
-### 회원가입
+### 회원가입 (모바일 토큰 필요)
 POST http://localhost:8080/customer/v1/sign-up
 Content-Type: application/json
 Site-Code: ABLY_APP
-Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJNT0JJTEVfVkVSSUZZX1RPS0VOIiwiaXNzIjoiQUJMWS1BVVRILVNZU1RFTSIsIlJFU1VMVCI6IlNVQ0NFU1MifQ.shQvs3UzdiphHh9wXt7NIzHZOWjxFAbe9CsmHrmWmuE
-#Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJDVVNUT01FUl9WRVJJRllfVE9LRU4iLCJwYXNzd29yZCI6IjEyMzQ1IiwiaXNzIjoiQUJMWS1BVVRILVNZU1RFTSIsIm1vYmlsZSI6IjAxMDQwMDQzMTQ0IiwiZW1haWwiOiJrMmplYW5zQG5hdmVyLmNvbSJ9.0zCCL_BNyffWBElsLQCptri0-Hq7Sx8Sb-1K9cHIkCM
-#Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJDVVNUT01FUl9WRVJJRllfVE9LRU4iLCJwYXNzd29yZCI6IjEyMzQ1IiwiaXNzIjoiQUJMWS1BVVRILVNZU1RFTSIsIm1vYmlsZSI6IjAxMDY1NjczMTQ0IiwiZW1haWwiOiJ4MmplYW5zQG5hdmVyLmNvbSJ9.7gVJg3cEn5ZX-clCHUjtLmI21LP7YSC0iHAJfoe4PAI
+Authorization:
 
 {
   "name": "홍토리",
@@ -39,20 +37,17 @@ Site-Code: ABLY_APP
   "password": "12345"
 }
 
-### 회원정보 가져오기
+### 회원정보 가져오기 (로그인 토큰 필요)
 POST http://localhost:8080/customer/v1/myinfo
 Content-Type: application/json
 Site-Code: ABLY_APP
-#Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJDVVNUT01FUl9WRVJJRllfVE9LRU4iLCJwYXNzd29yZCI6IjEyMzQ1IiwiaXNzIjoiQUJMWS1BVVRILVNZU1RFTSIsIm1vYmlsZSI6IjAxMDQwMDQzMTQ0IiwiZW1haWwiOiJrMmplYW5zQG5hdmVyLmNvbSJ9.0zCCL_BNyffWBElsLQCptri0-Hq7Sx8Sb-1K9cHIkCM
-Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJDVVNUT01FUl9WRVJJRllfVE9LRU4iLCJwYXNzd29yZCI6IjEyMzQ1IiwiaXNzIjoiQUJMWS1BVVRILVNZU1RFTSIsIm1vYmlsZSI6IjAxMDY1NjczMTQ0IiwiZW1haWwiOiJ4MmplYW5zQG5hdmVyLmNvbSJ9.7gVJg3cEn5ZX-clCHUjtLmI21LP7YSC0iHAJfoe4PAI
+Authorization:
 
-### 비밀번호 변경하기
+### 비밀번호 변경하기 (모바일 토큰 필요)
 POST http://localhost:8080/customer/v1/modify-password
 Content-Type: application/json
 Site-Code: ABLY_APP
-Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJNT0JJTEVfVkVSSUZZX1RPS0VOIiwiaXNzIjoiQUJMWS1BVVRILVNZU1RFTSIsIlJFU1VMVCI6IlNVQ0NFU1MifQ.shQvs3UzdiphHh9wXt7NIzHZOWjxFAbe9CsmHrmWmuE
-#Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJDVVNUT01FUl9WRVJJRllfVE9LRU4iLCJwYXNzd29yZCI6IjEyMzQ1IiwiaXNzIjoiQUJMWS1BVVRILVNZU1RFTSIsIm1vYmlsZSI6IjAxMDQwMDQzMTQ0IiwiZW1haWwiOiJrMmplYW5zQG5hdmVyLmNvbSJ9.0zCCL_BNyffWBElsLQCptri0-Hq7Sx8Sb-1K9cHIkCM
-#Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJDVVNUT01FUl9WRVJJRllfVE9LRU4iLCJwYXNzd29yZCI6IjEyMzQ1IiwiaXNzIjoiQUJMWS1BVVRILVNZU1RFTSIsIm1vYmlsZSI6IjAxMDY1NjczMTQ0IiwiZW1haWwiOiJ4MmplYW5zQG5hdmVyLmNvbSJ9.7gVJg3cEn5ZX-clCHUjtLmI21LP7YSC0iHAJfoe4PAI
+Authorization:
 
 {
   "email": "queue@naver.com",
