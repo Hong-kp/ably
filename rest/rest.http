@@ -8,7 +8,7 @@ Content-Type: application/json
 Site-Code: ABLY_APP
 
 {
-  "mobile": "01040043144",
+  "mobile": "01051505050",
   "auth_code": "1861"
 }
 
@@ -21,9 +21,9 @@ Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJNT0JJTEVfVkVSSUZZ
 #Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJDVVNUT01FUl9WRVJJRllfVE9LRU4iLCJwYXNzd29yZCI6IjEyMzQ1IiwiaXNzIjoiQUJMWS1BVVRILVNZU1RFTSIsIm1vYmlsZSI6IjAxMDY1NjczMTQ0IiwiZW1haWwiOiJ4MmplYW5zQG5hdmVyLmNvbSJ9.7gVJg3cEn5ZX-clCHUjtLmI21LP7YSC0iHAJfoe4PAI
 
 {
-  "name": "김미경",
-  "email": "x2jeans@naver.com",
-  "mobile": "01065673144",
+  "name": "홍토리",
+  "email": "queue@naver.com",
+  "mobile": "01051505050",
   "nick_name": "김김이",
   "password": "12345"
 }
@@ -34,8 +34,8 @@ Content-Type: application/json
 Site-Code: ABLY_APP
 
 {
-  "email": "x2jeans@naver.com",
-  "mobile": "01065673144",
+  "email": "queue@naver.com",
+  "mobile": "01051505050",
   "password": "12345"
 }
 
@@ -55,7 +55,7 @@ Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJNT0JJTEVfVkVSSUZZ
 #Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJDVVNUT01FUl9WRVJJRllfVE9LRU4iLCJwYXNzd29yZCI6IjEyMzQ1IiwiaXNzIjoiQUJMWS1BVVRILVNZU1RFTSIsIm1vYmlsZSI6IjAxMDY1NjczMTQ0IiwiZW1haWwiOiJ4MmplYW5zQG5hdmVyLmNvbSJ9.7gVJg3cEn5ZX-clCHUjtLmI21LP7YSC0iHAJfoe4PAI
 
 {
-  "email": "x2jeans@naver.com",
+  "email": "queue@naver.com",
   "password": "12345",
   "new_password": "3144"
 }
