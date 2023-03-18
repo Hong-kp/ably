@@ -2,9 +2,6 @@ package com.ably.project.global.infrastructure.exception
 
 import com.ably.project.global.domain.enums.HttpStatusCode
 
-/**
- * throw ApiException(PaymentErrorCode.FAILED_PAYMENT)
- */
 class ApiException : RuntimeException {
     private var userErrorCode: ErrorCode? = null
     private var httpStatus: HttpStatusCode? = null

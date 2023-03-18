@@ -23,7 +23,7 @@ class JWTUtil {
     lateinit var issuer: String
 
     /**
-     * 전화번호 인증 토큰생송
+     * 모바일 인증 토큰생성
      */
     fun createByMobileVerify(): String? {
         return JWT.create()
@@ -34,7 +34,7 @@ class JWTUtil {
     }
 
     /**
-     * 전화번호 인증 토큰 검증
+     * 모바일 인증 토큰 검증
      */
     fun claimByMobileToken(token: String): String {
         val parseToken = JWT.require(Algorithm.HMAC256(secretKey))
@@ -47,7 +47,7 @@ class JWTUtil {
     }
 
     /**
-     * 로그인 토큰 생성
+     * 로그인 인증 토큰 생성
      */
     fun createByLoginVerify(dto: CustomerDTO.LoginDTO): String? {
         return JWT.create()
@@ -58,7 +58,7 @@ class JWTUtil {
     }
 
     /**
-     * 로그인 토큰 검증
+     * 로그인 인증 토큰 검증
      */
     fun claimByLoginToken(token: String): String {
         val parseToken = JWT.require(Algorithm.HMAC256(secretKey))
