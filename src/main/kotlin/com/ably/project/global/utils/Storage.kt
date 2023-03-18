@@ -7,5 +7,5 @@ import com.ably.project.customer.presentation.dto.CustomerDTO
  */
 object Storage {
     // 인증고객정보
-    var customerId = ThreadLocal<CustomerDTO>()
+    var customer = ThreadLocal<CustomerDTO>()
 }

@@ -81,7 +81,7 @@ class CustomerService(
      * 내 정보 보기
      */
     override fun myInfo(): CustomerDTO {
-        return Storage.customerId.get()
+        return Storage.customer.get()
     }
 
     /**

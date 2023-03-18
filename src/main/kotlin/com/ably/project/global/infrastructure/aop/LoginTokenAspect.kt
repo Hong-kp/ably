@@ -37,7 +37,7 @@ class LoginTokenAspect(
         checkUserToken(bearer).onSuccess {
             log.info("(@User@Token) 검증성공 권한소유자 {}",it)
 
-            Storage.customerId.set(customerPersistenceService.findByEmail(it))
+            Storage.customer.set(customerPersistenceService.findByEmail(it))
         }.onFailure {
             throw ApiException(
                 "(@User@Token) 요청 권한이 없습니다. (토큰 검증에 실패하였습니다.)",
