@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity
 @JsonInclude(JsonInclude.Include.NON_NULL)
 class ApiFormat<T>(
     @get:JsonProperty("content")
-    val content: T? = null, /*FeignClient의 수신데이터로 ApiFormat을 받을 때는 Jackson을 사용하는데 JackSon은 기본생성자가 없으면 변환이 되지 않으므로 content를 nullable처리함*/
+    val content: T? = null,
     @get:JsonProperty("meta")
     var meta: Meta = Meta.ok()
 ) {

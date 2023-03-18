@@ -13,6 +13,17 @@ class MobileAuth {
     @Column(name = "auth_code", length = 4)
     lateinit var authCode: String
 
-    @Column(name = "expired_at", updatable = false)
+    @Column(name = "expired_at")
     var expiredAt: LocalDateTime? = null
+
+    /**
+     * 인증코드 엔티티 객체 생성
+     */
+    fun createMobileAuth(mobile: String, authCode: String, expiredAt: LocalDateTime): MobileAuth {
+        return MobileAuth().apply {
+            this.mobile = mobile
+            this.authCode = authCode
+            this.expiredAt = expiredAt
+        }
+    }
 }

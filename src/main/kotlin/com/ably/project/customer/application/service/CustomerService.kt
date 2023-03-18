@@ -4,8 +4,11 @@ import com.ably.project.customer.application.usecase.CustomerUseCase
 import com.ably.project.customer.domain.service.CustomerPersistenceService
 import com.ably.project.customer.presentation.dto.CustomerDTO
 import com.ably.project.customer.presentation.enums.CustomerErrorCode
+import com.ably.project.global.infrastructure.aop.LoginTokenAspect
 import com.ably.project.global.infrastructure.exception.ApiException
+import com.ably.project.global.utils.EncProc
 import com.ably.project.global.utils.JWTUtil
+import com.ably.project.global.utils.Storage
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 
@@ -36,35 +39,66 @@ class CustomerService(
          * 모바일 인증번호 검증 완료 후 토큰 발행
          */
         return customerPersistenceService.inspectMobileAuthCode(dto.mobile!!,dto.authCode!!)?.let {
+            customerPersistenceService.deleteMobileAuthCode(dto.mobile!!,dto.authCode!!)
             jwtUtil.createByMobileVerify()
         }?: throw ApiException(CustomerErrorCode.FAIL_ISSUE_MOBILE_TOKEN)
     }
 
     /**
      * 회원가입
+     *
+     * 이메일 혹은 전화번호로 가입된 아이디가 있으면 실패 없으면 가입
      */
     override fun signUp(dto: CustomerDTO) {
-        TODO("Not yet implemented")
+        customerPersistenceService.findCustomer(dto)?.let {
+            throw ApiException(CustomerErrorCode.EXISTS_CUSTOMER)
+        }?:customerPersistenceService.signUp(dto)
     }
 
     /**
      * 로그인
      */
-    override fun signIn(dto: CustomerDTO) {
-        TODO("Not yet implemented")
+    override fun signIn(dto: CustomerDTO.LoginDTO): String {
+        /**
+         * 로그인 완료 후 토큰 발행
+         */
+        return customerPersistenceService.signIn(dto)?.let {
+            // 로그인 인증 성공 시 entity 값을 dto에 주입
+            if(it.password == EncProc.getHash(dto.password!!)) {
+                dto.apply {
+                    this.mobile = it.mobile
+                    this.email = it.email
+                }
+
+                jwtUtil.createByLoginVerify(dto)
+            }else{
+                throw ApiException(CustomerErrorCode.PASSWORD_INVALID)
+            }
+        }?:throw ApiException(CustomerErrorCode.NOT_EXISTS_CUSTOMER_INFO)
     }
 
     /**
-     * 내정보보기
+     * 내 정보 보기
      */
-    override fun myinfo(dto: CustomerDTO) {
-        TODO("Not yet implemented")
+    override fun myInfo(): CustomerDTO {
+        return Storage.customerId.get()
     }
 
     /**
      * 비밀번호수정
      */
-    override fun passwordModify(dto: CustomerDTO) {
-        TODO("Not yet implemented")
+    override fun passwordModify(dto: CustomerDTO.ModifyPasswordDTO) {
+        customerPersistenceService.signIn(
+            CustomerDTO.LoginDTO(
+                email = dto.email,
+                password = dto.password
+            )
+        )?.let {
+            if(it.password != EncProc.getHash(dto.password!!)) {
+                throw ApiException(CustomerErrorCode.PASSWORD_INVALID)
+            }
+
+            it.setMyPassword(dto.newPassword!!)
+        }
     }
 }

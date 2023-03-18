@@ -12,6 +12,7 @@ interface CustomerUseCase {
     /**
      * 전화번호 인증 토큰 발급
      */
+    @Transactional
     fun getMobileToken(dto: CustomerDTO.MobileVerifyDTO): String
 
     /**
@@ -23,16 +24,17 @@ interface CustomerUseCase {
     /**
      * 로그인 (issue Token)
      */
-    fun signIn(dto: CustomerDTO)
+    fun signIn(dto: CustomerDTO.LoginDTO): String
 
     /**
      * 내 정보 보기 (with LoginToken)
      */
-    fun myinfo(dto: CustomerDTO)
+    fun myInfo(): CustomerDTO
 
     /**
      * 비밀번호 수정 (with LoginToken)
      */
-    fun passwordModify(dto: CustomerDTO)
+    @Transactional
+    fun passwordModify(dto: CustomerDTO.ModifyPasswordDTO)
 
 }

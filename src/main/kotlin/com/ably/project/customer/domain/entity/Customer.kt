@@ -1,5 +1,6 @@
 package com.ably.project.customer.domain.entity
 
+import com.ably.project.customer.presentation.dto.CustomerDTO
 import com.ably.project.global.domain.entity.BaseEntity
 import com.ably.project.global.utils.EncProc
 import org.hibernate.annotations.DynamicUpdate
@@ -34,5 +35,18 @@ class Customer: BaseEntity() {
      */
     fun setMyPassword(password: String){
         this.password = EncProc.getHash(password)
+    }
+
+    /**
+     * 회원 가입 객체 생성 from CustomerDTO
+     */
+    fun createCustomer(dto: CustomerDTO): Customer {
+        return Customer().apply {
+            this.email = dto.email
+            this.mobile = dto.mobile
+            this.name = dto.name
+            this.nickName = dto.nickName
+            this.password = EncProc.getHash(dto.password!!)
+        }
     }
 }

@@ -27,7 +27,7 @@ internal class ExceptionAdvice {
     @ExceptionHandler(MethodArgumentNotValidException::class)
     fun handleMethodArgumentNotValidException(bindingResult: BindingResult): ResponseEntity<ApiFormat<Unit>> {
         val fieldErrors = bindingResult.allErrors.mapNotNull {it.defaultMessage}.joinToString(
-            transform = {"[${it}]"},
+            transform = {"$it"},
             separator = ",",
         )
 
