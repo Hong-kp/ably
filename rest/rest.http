@@ -1,5 +1,5 @@
 ### 모바일 인증번호 발급
-GET http://localhost:8080/customer/v1/mobile-authcode/01040043144
+GET http://localhost:8080/customer/v1/mobile-authcode/01051505050
 Accept: application/json
 
 ### 모바일 토큰 발급
@@ -50,6 +50,6 @@ Site-Code: ABLY_APP
 Authorization:
 
 {
-  "mobile": "queue@naver.com",
+  "mobile": "01051505050",
   "password": "12345"
 }

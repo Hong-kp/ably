@@ -19,7 +19,7 @@ data class CustomerDTO(
     @field:Email
     @get:JsonProperty("email") var email: String? = null,
 
-    @field:Pattern(regexp = "^01(?:0|1|0)[.-]?(\\d{4})[.-]?(\\d{4})$", message = "올바른 형식의 전화번호여야 합니다. (010-XXXX-XXXX)")
+    @field:Pattern(regexp = "^01(?:0|1|0)[.-]?(\\d{4})[.-]?(\\d{4})$", message = "올바른 형식의 전화번호여야 합니다. (010XXXXXXXX)")
     @field:NotNull(message = "전화번호는 필수 입력 입니다.")
     @get:JsonProperty("mobile") var mobile: String? = null,
 
@@ -36,7 +36,7 @@ data class CustomerDTO(
         @get:JsonProperty("email")
         var email: String? = null,
 
-        @field:Pattern(regexp = "^01(?:0|1|0)[.-]?(\\d{4})[.-]?(\\d{4})$", message = "올바른 형식의 전화번호여야 합니다. (010-XXXX-XXXX)")
+        @field:Pattern(regexp = "^01(?:0|1|0)[.-]?(\\d{4})[.-]?(\\d{4})$", message = "올바른 형식의 전화번호여야 합니다. (010XXXXXXXX)")
         @field:NotNull(message = "전화번호는 필수 입력 입니다.")
         @get:JsonProperty("mobile")
         var mobile: String? = null,
@@ -50,7 +50,7 @@ data class CustomerDTO(
      * 로그인 DTO (전화번호 , 이메일 , 비밀번호)
      */
     data class LoginDTO(
-        @field:Pattern(regexp = "^01(?:0|1|0)[.-]?(\\d{4})[.-]?(\\d{4})$", message = "올바른 형식의 전화번호여야 합니다. (010-XXXX-XXXX)")
+        @field:Pattern(regexp = "^01(?:0|1|0)[.-]?(\\d{4})[.-]?(\\d{4})$", message = "올바른 형식의 전화번호여야 합니다. (010XXXXXXXX)")
         @get:JsonProperty("mobile") var mobile: String? = null,
 
         @field:Email
@@ -68,7 +68,7 @@ data class CustomerDTO(
      * 비밀번호 변경 DTO
      */
     data class ModifyPasswordDTO(
-        @field:Pattern(regexp = "^01(?:0|1|0)[.-]?(\\d{4})[.-]?(\\d{4})$", message = "올바른 형식의 전화번호여야 합니다. (010-XXXX-XXXX)")
+        @field:Pattern(regexp = "^01(?:0|1|0)[.-]?(\\d{4})[.-]?(\\d{4})$", message = "올바른 형식의 전화번호여야 합니다. (010XXXXXXXX)")
         @get:JsonProperty("mobile") var mobile: String? = null,
 
         @field:NotNull(message = "비밀번호는 필수 입력 입니다.")
