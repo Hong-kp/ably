@@ -85,8 +85,8 @@ class CustomerController(
     @RequiredMobileToken
     @AcceptService([ServiceType.ABLY_APP,ServiceType.ABLY_ADMIN])
     @ResponseBody
-    @PostMapping("/v1/modify-password")
-    fun passwordModify(
+    @PostMapping("/v1/reset-password")
+    fun passwordReset(
         @Valid @RequestBody modifyPasswordDTO: CustomerDTO.ModifyPasswordDTO
     ): ResponseEntity<ApiFormat<Unit>> = ResponseEntity.ok(ApiFormat(customerUseCase.passwordModify(modifyPasswordDTO)).ok("비밀번호 변경이 완료 되었습니다."))
 }

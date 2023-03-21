@@ -44,13 +44,12 @@ Site-Code: ABLY_APP
 Authorization:
 
 ### 비밀번호 변경하기 (모바일 토큰 필요)
-POST http://localhost:8080/customer/v1/modify-password
+POST http://localhost:8080/customer/v1/reset-password
 Content-Type: application/json
 Site-Code: ABLY_APP
 Authorization:
 
 {
-  "email": "queue@naver.com",
-  "password": "12345",
-  "new_password": "3144"
+  "mobile": "queue@naver.com",
+  "password": "12345"
 }

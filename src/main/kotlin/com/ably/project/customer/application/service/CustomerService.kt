@@ -88,17 +88,11 @@ class CustomerService(
      * 비밀번호수정
      */
     override fun passwordModify(dto: CustomerDTO.ModifyPasswordDTO) {
-        customerPersistenceService.signIn(
-            CustomerDTO.LoginDTO(
-                email = dto.email,
-                password = dto.password
-            )
-        )?.let {
-            if(it.password != EncProc.getHash(dto.password!!)) {
-                throw ApiException(CustomerErrorCode.PASSWORD_INVALID)
-            }
-
-            it.setMyPassword(dto.newPassword!!)
-        }
+        customerPersistenceService.findCustomer(CustomerDTO(
+            mobile = dto.mobile,
+            password = dto.password
+        ))?.let {
+            it.setMyPassword(dto.password!!)
+        }?:throw ApiException(CustomerErrorCode.NOT_EXISTS_CUSTOMER_INFO)
     }
 }

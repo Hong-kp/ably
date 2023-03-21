@@ -30,6 +30,7 @@ class JWTUtil {
             .withIssuer(issuer)
             .withSubject("MOBILE_VERIFY_TOKEN") // 전화번호인증 토큰
             .withPayload(mapOf("RESULT" to "SUCCESS"))
+            .withExpiresAt(Date(System.currentTimeMillis() + (60000*3)))
             .sign(Algorithm.HMAC256(secretKey))
     }
 
@@ -54,6 +55,7 @@ class JWTUtil {
             .withIssuer(issuer)
             .withSubject("CUSTOMER_VERIFY_TOKEN") // 회원인증완료 토큰
             .withPayload(jacksonObjectMapper().convertValue(dto,Map::class.java) as MutableMap<String, *>?)
+            .withExpiresAt(Date(System.currentTimeMillis() + (60000*3)))
             .sign(Algorithm.HMAC256(secretKey))
     }
 

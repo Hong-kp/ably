@@ -68,17 +68,12 @@ data class CustomerDTO(
      * 비밀번호 변경 DTO
      */
     data class ModifyPasswordDTO(
-        @field:NotNull(message = "이메일은 필수 입력 입니다.")
-        @field:Email
-        @get:JsonProperty("email") var email: String? = null,
+        @field:Pattern(regexp = "^01(?:0|1|0)[.-]?(\\d{4})[.-]?(\\d{4})$", message = "올바른 형식의 전화번호여야 합니다. (010-XXXX-XXXX)")
+        @get:JsonProperty("mobile") var mobile: String? = null,
 
-        @field:NotNull(message = "기존 비밀번호는 필수 입력 입니다.")
+        @field:NotNull(message = "비밀번호는 필수 입력 입니다.")
         @get:JsonProperty("password")
-        var password: String? = null,
-
-        @field:NotNull(message = "변경할 비밀번호는 필수 입력 입니다.")
-        @get:JsonProperty("new_password")
-        var newPassword: String? = null
+        var password: String? = null
     )
 
     /**

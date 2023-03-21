@@ -48,18 +48,18 @@ class CustomerServiceTest @Autowired constructor(
     fun 비밀번호_변경하기_성공() {
         customerUseCase.passwordModify(
             CustomerDTO.ModifyPasswordDTO(
-                email = "google@gmail.com", password = "1234", newPassword = "3144"
+                mobile = "01044443333", password = "12345"
         ))
     }
 
     @Test
-    fun 비밀번호_변경하기_실패_기존패스워드_오입력() {
+    fun 비밀번호_변경하기_실패_없는회원() {
         assertThatThrownBy {
             customerUseCase.passwordModify(
                 CustomerDTO.ModifyPasswordDTO(
-                    email = "google@gmail.com", password = "12345", newPassword = "3144"
+                    mobile = "01044443335", password = "1234"
                 ))
         }.isInstanceOf(ApiException::class.java)
-            .hasMessage(CustomerErrorCode.PASSWORD_INVALID.message)
+            .hasMessage(CustomerErrorCode.NOT_EXISTS_CUSTOMER_INFO.message)
     }
 }
