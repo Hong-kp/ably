@@ -36,4 +36,4 @@ jobs:
         # arguments: build
       run : ./gradlew clean build --exclude-task test
     - name: ls -al
-      run: la -al
+      run: ls -al
